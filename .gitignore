@@ -1,0 +1,5 @@
+node_modules
+.env
+.prod.env
+openMusic-queue-consumer/node_modules
+openMusic-queue-consumer/.env
