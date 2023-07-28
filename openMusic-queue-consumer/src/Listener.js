@@ -8,13 +8,10 @@ class Listener {
 
   async listen(message) {
     try {
-      const { userId, playlistId, targetEmail } = JSON.parse(
+      const { playlistId, targetEmail } = JSON.parse(
         message.content.toString()
       );
-      const playlist = await this._playlistsService.getPlaylistById(
-        playlistId,
-        userId
-      );
+      const playlist = await this._playlistsService.getPlaylistById(playlistId);
       const songs = await this._playlistsService.getSongsByPlaylistId(
         playlistId
       );

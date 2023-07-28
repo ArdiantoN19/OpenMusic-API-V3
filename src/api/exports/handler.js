@@ -19,7 +19,6 @@ class ExportPlaylistsHandler {
     );
 
     const message = JSON.stringify({
-      userId: credentialId,
       playlistId,
       targetEmail,
     });

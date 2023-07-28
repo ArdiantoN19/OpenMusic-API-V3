@@ -14,7 +14,9 @@ class UploadsHandler {
     this._validator.validateUploadImageHeaders(cover.hapi.headers);
 
     const filename = await this._storageService.writeFile(cover, cover.hapi);
-    const fileLocation = `http://${process.env.HOST}:${process.env.PORT}/upload/images/${filename}`;
+    const fileLocation = process.env.AWS_BUCKET_NAME
+      ? filename
+      : `http://${process.env.HOST}:${process.env.PORT}/upload/images/${filename}`;
 
     await this._albumsService.editCoverAlbums(id, fileLocation);
     return h
