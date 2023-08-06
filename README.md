@@ -1,4 +1,4 @@
-# OpenMusic API V2 - Hapi JS
+# OpenMusic API V3 - Hapi JS
 
 ## Endpoint
 
@@ -42,6 +42,7 @@
       "id": "album-Mk8AnmCp210PwT6B",
       "name": "Viva la Vida",
       "year": 2008,
+      "coverUrl": "http://...",
       "songs": [
         {
           "id": "song-Qbax5Oy7L8WKf74l",
@@ -96,6 +97,68 @@
 {
   "status": "success",
   "message": "Berhasil menghapus album"
+}
+```
+
+### Mengunggah Sampul Album
+
+- /albums/{id}/covers (POST)
+
+#### Request Body (Form data)
+
+```json
+{
+  "cover": "file", --> (required, max 512000 Bytes)
+}
+```
+
+#### Response (201) : created
+
+```json
+{
+  "status": "success",
+  "message": "Sampul berhasil diunggah"
+}
+```
+
+### Menyukai Album
+
+- /albums/{id}/likes (POST)
+
+#### Response (201) : created
+
+```json
+{
+  "status": "success",
+  "message": "Berhasil menyukai album"
+}
+```
+
+### Batal menyukai Album
+
+- /albums/{id}/likes (DELETE)
+
+#### Response (200) : ok
+
+```json
+{
+  "status": "success",
+  "message": "Berhasil menghapus like dari album"
+}
+```
+
+### Melihat jumlah yang menyukai Album
+
+- /albums/{id}/likes (GET)
+
+#### Response (200) : ok
+
+```json
+{
+  "status": "success",
+  "data": {
+    "likes": 2
+  }
 }
 ```
 
@@ -472,6 +535,45 @@
 {
   "status": "success",
   "message": "Song berhasil dihapus dari playlist"
+}
+```
+
+### Ekspor Lagu Pada Playlist
+
+- /export/playlist/{playlistId} (POST)
+
+#### Request Body
+
+```json
+{
+  "targetEmail": "yourEmail@test.com", --> (required)
+}
+```
+
+#### Response (201) : created
+
+```json
+{
+  "status": "success",
+  "message": "Permintaan Anda sedang kami proses"
+}
+```
+
+##### Struktur JSON yang diekspor
+
+```json
+{
+  "playlist": {
+    "id": "playlist-Mk8AnmCp210PwT6B",
+    "name": "My Favorite Coldplay Song",
+    "songs": [
+      {
+        "id": "song-Qbax5Oy7L8WKf74l",
+        "title": "Life in Technicolor",
+        "performer": "Coldplay"
+      }
+    ]
+  }
 }
 ```
 
